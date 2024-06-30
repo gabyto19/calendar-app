@@ -1,12 +1,14 @@
 <div class="calendar">
-    <div class="header">
-      <div class="month-title">{{ currentMonth }} {{ currentYear }}</div>
-      <div *ngFor="let day of days">{{ day }}</div>
-    </div>
-    <div class="body">
-      <div *ngFor="let date of dates" [class.today]="isToday(date)" [class.holiday]="isHoliday(date)">
-        {{ date.getDate() }}
-      </div>
+  <div class="header">
+    <div class="month-title">{{ currentMonth }} {{ currentYear }}</div>
+    <div *ngFor="let day of days">{{ day }}</div>
+  </div>
+  <div class="body">
+    <div *ngFor="let date of dates" 
+         [class.today]="isToday(date)" 
+         [class.holiday]="isHoliday(date)"
+         [class.weekend]="isWeekend(date)">
+      {{ date.getDate() }}
     </div>
   </div>
-  
+</div>

@@ -1,37 +1,44 @@
 .calendar {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  width: 50%;
+  margin: auto;
+  height: 450px;
+  .header {
     display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 10px;
-  
-    .header {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      align-items: center;
-      .month-title {
-        grid-column: span 7;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.5em;
-        margin-bottom: 10px;
-      }
-    }
-  
-    .body {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      div {
-        padding: 10px;
-        border: 1px solid #ccc;
-      }
-  
-      .today {
-        background-color: yellow;
-      }
-  
-      .holiday {
-        background-color: red;
-        color: white;
-      }
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+
+    .month-title {
+      grid-column: span 7;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: 10px;
     }
   }
-  
+
+  .body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    
+    div {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .today {
+      background-color: yellow;
+    }
+
+    .holiday {
+      background-color: red;
+      color: white;
+    }
+
+    .weekend {
+      background-color: lightcoral;
+    }
+  }
+}

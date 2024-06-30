@@ -14,6 +14,7 @@ export class CalendarComponent implements OnInit {
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   dates: Date[] = [];
   holidays$: Observable<Holiday[]>;
+  holidays: Holiday[] = [];
   currentMonth: string | undefined;
   currentYear: number | undefined;
 
@@ -23,6 +24,9 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadHolidays());
+    this.holidays$.subscribe(holidays => {
+      this.holidays = holidays;
+    });
     this.generateCalendar();
   }
 
@@ -47,14 +51,15 @@ export class CalendarComponent implements OnInit {
   }
 
   isHoliday(date: Date): boolean {
-    let isHoliday = false;
-    this.holidays$.subscribe(holidays => {
-      isHoliday = holidays.some(holiday =>
-        holiday.date.getDate() === date.getDate() &&
-        holiday.date.getMonth() === date.getMonth() &&
-        holiday.date.getFullYear() === date.getFullYear()
-      );
-    });
-    return isHoliday;
+    return this.holidays.some(holiday =>
+      holiday.date.getDate() === date.getDate() &&
+      holiday.date.getMonth() === date.getMonth() &&
+      holiday.date.getFullYear() === date.getFullYear()
+    );
+  }
+
+  isWeekend(date: Date): boolean {
+    const day = date.getDay();
+    return day === 6 || day === 5; // 0 is Sunday, 6 is Saturday
   }
 }
